@@ -27,7 +27,6 @@ export default function Home() {
       setIsLoading(true);
       try {
         const menu = await fetchMenuData(hall, date);
-        console.log(menu)
         setMenuData(menu);
       } catch (error) {
         console.error('Error fetching menu data:', error);
@@ -42,7 +41,6 @@ export default function Home() {
     const fetchDiningHallsData = async () => {
       try {
         const halls = await fetchDiningHalls() as string[]
-        console.log(halls)
         setDiningHalls(halls);
         if (halls.length > 0) {
           setSelectedDiningHall(halls[0]);

@@ -8,8 +8,6 @@ from supabase import create_client, Client
 
 load_dotenv()
 
-
-
 BUCKET_NAME = os.environ['BUCKET_NAME']
 TABLE_NAME = os.environ['TABLE_NAME']
 DOWNLOAD_PATH = os.environ['JSON_FILE_PATH']
@@ -39,10 +37,6 @@ def organize_and_upload_data(data):
     supabase: Client = create_client(url, key)  
 
     delete_data = supabase.table(TABLE_NAME).delete().neq('id', 0).execute()
-
-    # bulk add data instead of for loop for each data add
-
-    print(data)
 
     insert_data = supabase.table(TABLE_NAME).insert(data).execute()
     print(f'Finished data insertion {insert_data}')

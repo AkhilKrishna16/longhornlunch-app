@@ -34,7 +34,6 @@ const MenuVote = ({voteCount, id }: {voteCount: number, id: number }) => {
   }, [id]);
 
   const handleLocalUpvote = async () => {
-    console.log(id)
     if(voteStatus === 'upvoted') {
       const newValue = await handleDownvote(id)
       setValue(newValue)
@@ -55,7 +54,6 @@ const MenuVote = ({voteCount, id }: {voteCount: number, id: number }) => {
    }
 
    const handleLocalDownvote = async () => {
-    console.log(id)
       if(voteStatus === 'downvoted') {
         const newValue = await handleUpvote(id)
         setValue(newValue)
