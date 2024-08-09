@@ -4,6 +4,7 @@ import DateSelector from "@/components/DateSelector";
 import MainLayout from "@/components/MainLayout";
 import Navbar from "@/components/Navbar";
 import SearchBar from "@/components/SearchBar";
+import { useClearLocalStorageAtMidnight } from "@/clearLocalStorage";
 
 import React, { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
@@ -12,6 +13,8 @@ import { fetchDatesForDiningHall, fetchDiningHalls, fetchMenuData } from "@/api"
 
 
 export default function Home() {
+  useClearLocalStorageAtMidnight()
+  
   const [diningHalls, setDiningHalls] = useState<string[]>([]);
   const [dates, setDates] = useState<string[]>([]);
   const [menuData, setMenuData] = useState<any>(null);
@@ -57,10 +60,16 @@ export default function Home() {
         setIsLoading(true);
         try {
           const availableDates = await fetchDatesForDiningHall(selectedDiningHall);
-          console.log(availableDates)
-          setDates(availableDates);
-          if (availableDates.length > 0) {
-            setSelectedDate(availableDates[0]);
+
+          const sortedDates = availableDates.sort((a: string, b: string) => {
+            const dateA = new Date(Date.parse(a.replace(/^\w+,\s/, '')));
+            const dateB = new Date(Date.parse(b.replace(/^\w+,\s/, '')));
+            return dateA.getTime() - dateB.getTime();
+          });
+
+          setDates(sortedDates);
+          if (sortedDates.length > 0) {
+            setSelectedDate(sortedDates[0]);
           }
         } catch (error) {
           console.error("Error fetching dates:", error);
@@ -79,16 +88,17 @@ export default function Home() {
   }, [selectedDiningHall, selectedDate, debouncedFetchMenu]);
 
   return (
+    
     <main className="flex flex-col min-h-screen">
       <Navbar diningHalls={diningHalls} selectedDiningHall={selectedDiningHall} onDiningHallsChange={setSelectedDiningHall} />
       <div className="relative top-[96px] md:top-[80px] flex flex-col items-center justify-center">
         <div className='flex flex-row w-full justify-center max-w-7xl px-4 items-center'>
-          <div className="flex-1"></div> {/* This empty div helps push the DateSelector to the center */}
+          <div className="flex-1"></div> 
           <div className="flex-1 flex justify-center">
             <DateSelector dates={dates} selectedDate={selectedDate} onDateChange={setSelectedDate}/>
           </div>
           <div className="flex-1 flex justify-end">
-            <SearchBar />
+            
           </div>
         </div>
           <MainLayout isLoading={isLoading} menuData={menuData}/> 

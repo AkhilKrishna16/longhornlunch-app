@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
 
-
 import Loading from './Loading'
 import MealType from './MealType'
 
@@ -20,8 +19,6 @@ interface CategorizedMenu {
   }
 }
 
-
-
 const categorizedMenuData = (menuData: MenuItem[]): CategorizedMenu => {
   return menuData ? menuData.reduce((acc, item) => {
     const { meal_type, category } = item
@@ -35,14 +32,21 @@ const categorizedMenuData = (menuData: MenuItem[]): CategorizedMenu => {
     }
 
     acc[meal_type][category].push(item)
+
+    acc[meal_type][category].sort((a, b) => a.id - b.id);
+
     return acc
   }, {} as CategorizedMenu) : {} as CategorizedMenu
 } 
 const MainLayout = ({isLoading, menuData} : {isLoading: boolean, menuData: string | any}) => {
 
-  console.log(menuData)
-
   const categorizedMenu = categorizedMenuData(menuData)
+
+  const mealOrder = ['Breakfast', 'Lunch', 'Dinner']
+
+  const sortedMealTypes = Object.keys(categorizedMenu).sort((a, b) => {
+    return mealOrder.indexOf(a) - mealOrder.indexOf(b)
+  })
 
   if (isLoading) {
     return (
@@ -51,23 +55,23 @@ const MainLayout = ({isLoading, menuData} : {isLoading: boolean, menuData: strin
       </div>
     );
   }
-  if (!menuData || menuData === 'Unavailable' ) {
-    return <div className='flex flex-col items-center justify-center h-full text-gray-200'>
-      <Image src='/texas-cleared-logo.png' width={128} height={128} alt='Longhorns Logo'/>
-      <h2>Sorry, but this is not open! Try again later!</h2>
+
+  if (!menuData || menuData.length == 0 ) {
+    return <div className='flex flex-col items-center justify-center h-[75vh] text-gray-200'>
+      <Image src='/texas-cleared-logo.png' width={256} height={256} alt='Longhorns Logo'/>
     </div>
   } 
 
   return (
     <div className='w-3/4 my-12'>
       <div className='hidden lg:flex flex-row justify-between items-start gap-28 mx-4'>
-        {Object.keys(categorizedMenu).map(mealType => (
+        {sortedMealTypes.map(mealType => (
           <MealType key={mealType} mealType={mealType} categories={categorizedMenu[mealType]}/>
         ))}
       </div>
 
       <div className='lg:hidden flex flex-col justify-around items-center gap-12'>
-        {Object.keys(categorizedMenu).map(mealType => (
+        {sortedMealTypes.map(mealType => (
           <MealType key={mealType} mealType={mealType} categories={categorizedMenu[mealType]}/>
         ))}
       </div>

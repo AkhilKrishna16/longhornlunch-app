@@ -47,7 +47,7 @@ const DesktopDateSelector = ({dates, selectedDate, onDateChange}: {dates: string
   };
 
   return (
-    <div className='hidden lg:flex space-x-6'>
+    <div className='flex space-y-2 lg:space-x-6 flex-wrap lg:flex-nowrap items-center text-center'>
       {dates.map((date, index) => (
         
         <button

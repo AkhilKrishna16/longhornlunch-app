@@ -67,11 +67,14 @@ const Navbar = ({ diningHalls, selectedDiningHall, onDiningHallsChange}: {dining
       <nav className='bg-navbar shadow-md'>
         <div className='container mx-auto px-6 py-3 flex justify-between items-center'>
           <div className='flex items-center'>
-            <Link href='/'>
+            <button onClick={() => {
+                onDiningHallsChange(diningHalls[0])
+                window.scrollTo({top: 0, behavior: 'smooth'})
+              }}>
               <div className='w-24 md:w-20'>
                 <Image src='/texas-cleared-logo.png' alt='Texas Logo' width={100} height={100} />
               </div>
-            </Link>
+            </button>
           </div>
 
           <div className='hidden md:flex flex-grow items-center justify-center pl-4'>
@@ -90,12 +93,12 @@ const Navbar = ({ diningHalls, selectedDiningHall, onDiningHallsChange}: {dining
             
           </div>
           
-          <div className='flex flex-row gap-2'>
+          <div className='hidden md:flex flex-row gap-2'>
             <div className='text-gray-200 rounded-xl bg-custom px-4 py-2'>
               <HoverCard>
                 <HoverCardTrigger className='cursor-default'>Note</HoverCardTrigger>
                 <HoverCardContent className='mt-4 bg-navbar border-none text-gray-200'>
-                  Some dining halls may be missing due to them closing for the scheduled week.
+                  Dining halls or dates may be missing due to them closing for the scheduled week or date.
                 </HoverCardContent>
               </HoverCard>
             </div>

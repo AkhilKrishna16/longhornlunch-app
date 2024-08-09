@@ -2,8 +2,17 @@
 
 import React from 'react'
 
+interface SearchBarProps {
+  searchQuery: string,
+  onSearchChange: (query: string) => void
+}
 
-const SearchBar = () => {
+
+const SearchBar: React.FC<SearchBarProps> = ({ searchQuery, onSearchChange }) => {
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onSearchChange(event.target.value)
+  }
 
   return (
     <div className='hidden lg:flex flex-row justify-end'>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { MenuItem } from './MainLayout'
 
 import MenuVote from './MenuVote'
@@ -16,7 +16,7 @@ const MenuCategory:React.FC<MenuCategoryProps> = ({ category, items }) => {
         {items.map((item, index) => (
           <li key={index} className='flex flex-row justify-between items-center mt-3 text-gray-200 mx-3'>
             <p>{item.name}</p>
-            <MenuVote id={item.id as number} voteCount={item.votes}/>
+            <MenuVote id={item.id as number} voteCount={item.votes}  />
           </li>
         ))}
       </ul>
