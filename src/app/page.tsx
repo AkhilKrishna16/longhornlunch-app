@@ -5,6 +5,7 @@ import MainLayout from "@/components/MainLayout";
 import Navbar from "@/components/Navbar";
 import SearchBar from "@/components/SearchBar";
 import { useClearLocalStorageAtMidnight } from "@/clearLocalStorage";
+import { Analytics } from '@vercel/analytics/react'
 
 import React, { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
@@ -88,6 +89,7 @@ export default function Home() {
 
   return (
       <main className="flex flex-col min-h-screen">
+        <Analytics />
         <Navbar diningHalls={diningHalls} selectedDiningHall={selectedDiningHall} onDiningHallsChange={setSelectedDiningHall} />
         <div className="relative top-[96px] md:top-[80px] flex flex-col items-center justify-center">
           <div className='flex flex-row w-full justify-center max-w-7xl px-4 items-center'>
