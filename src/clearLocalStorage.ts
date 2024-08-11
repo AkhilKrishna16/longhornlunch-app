@@ -15,9 +15,9 @@ export const useClearLocalStorageAtMidnight = () => {
       const night = new Date(
         now.getFullYear(),
         now.getMonth(),
-        now.getDate() + 1, 
-        1, 
-        0, 
+        now.getDate(), 
+        23, 
+        59, 
         0 
       );
       
