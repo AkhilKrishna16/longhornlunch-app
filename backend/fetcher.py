@@ -44,7 +44,7 @@ def organize_and_upload_data(data):
   except Exception as e:
     print(f'Failed addition! {str(e)}')
 
-def handler(): 
+def lambda_handler(event, context): 
   # send data by calling `organize_data()`
   value = retrieve_data()
   data = None
@@ -55,6 +55,3 @@ def handler():
     with open(DOWNLOAD_PATH, 'r') as file:
       data = json.load(file)
   organize_and_upload_data(data)
-
-if __name__ == '__main__':
-  handler()

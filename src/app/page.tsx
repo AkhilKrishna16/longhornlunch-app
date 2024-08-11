@@ -13,8 +13,9 @@ import { fetchDatesForDiningHall, fetchDiningHalls, fetchMenuData } from "@/api"
 
 
 export default function Home() {
-  useClearLocalStorageAtMidnight()
   
+  useClearLocalStorageAtMidnight()
+
   const [diningHalls, setDiningHalls] = useState<string[]>([]);
   const [dates, setDates] = useState<string[]>([]);
   const [menuData, setMenuData] = useState<any>(null);
@@ -86,21 +87,21 @@ export default function Home() {
   }, [selectedDiningHall, selectedDate, debouncedFetchMenu]);
 
   return (
-    
-    <main className="flex flex-col min-h-screen">
-      <Navbar diningHalls={diningHalls} selectedDiningHall={selectedDiningHall} onDiningHallsChange={setSelectedDiningHall} />
-      <div className="relative top-[96px] md:top-[80px] flex flex-col items-center justify-center">
-        <div className='flex flex-row w-full justify-center max-w-7xl px-4 items-center'>
-          <div className="flex-1"></div> 
-          <div className="flex-1 flex justify-center">
-            <DateSelector dates={dates} selectedDate={selectedDate} onDateChange={setSelectedDate}/>
+      <main className="flex flex-col min-h-screen">
+        <Navbar diningHalls={diningHalls} selectedDiningHall={selectedDiningHall} onDiningHallsChange={setSelectedDiningHall} />
+        <div className="relative top-[96px] md:top-[80px] flex flex-col items-center justify-center">
+          <div className='flex flex-row w-full justify-center max-w-7xl px-4 items-center'>
+            <div className="flex-1"></div> 
+            <div className="flex-1 flex justify-center">
+              <DateSelector dates={dates} selectedDate={selectedDate} onDateChange={setSelectedDate}/>
+            </div>
+            <div className="flex-1 flex justify-end">
+              
+            </div>
           </div>
-          <div className="flex-1 flex justify-end">
-            
-          </div>
+            <MainLayout isLoading={isLoading} menuData={menuData}/> 
         </div>
-          <MainLayout isLoading={isLoading} menuData={menuData}/> 
-      </div>
-    </main>
+      </main>
+    
   );
 }

@@ -67,14 +67,14 @@ const Navbar = ({ diningHalls, selectedDiningHall, onDiningHallsChange}: {dining
       <nav className='bg-navbar shadow-md'>
         <div className='container mx-auto px-6 py-3 flex justify-between items-center'>
           <div className='flex items-center'>
-            <button onClick={() => {
+            {/* <button onClick={() => {
                 onDiningHallsChange(diningHalls[0])
                 window.scrollTo({top: 0, behavior: 'smooth'})
               }}>
               <div className='w-24 md:w-20'>
                 <Image src='/texas-cleared-logo.png' alt='Texas Logo' width={100} height={100} />
               </div>
-            </button>
+            </button> */}
           </div>
 
           <div className='hidden md:flex flex-grow items-center justify-center pl-4'>

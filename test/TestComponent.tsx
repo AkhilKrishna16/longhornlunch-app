@@ -4,6 +4,28 @@ import React, { useState, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
 import { fetchDatesForDiningHall, fetchDiningHalls, fetchMenuData } from '@/api';
 
+// export function clearStorageAndRefresh() {
+//   useEffect(() => {
+//     const clearLocalStorageAtMidnight = () => {
+//       const now = new Date();
+      
+//       setTimeout(() => {
+//         localStorage.clear();
+//         console.log('Local storage cleared at', new Date().toLocaleString());
+        
+//         setInterval(clearLocalStorageAtMidnight, 1000);
+//       }, 1000);
+//     };
+
+//     clearLocalStorageAtMidnight();
+
+//     return () => {
+//       const intervalId = setInterval(clearLocalStorageAtMidnight, 1000);
+//       clearInterval(intervalId);
+//     };
+//   }, []);
+// }
+
 const TestComponent = () => {
   const [diningHalls, setDiningHalls] = useState<string[]>([]);
   const [dates, setDates] = useState<string[]>([]);

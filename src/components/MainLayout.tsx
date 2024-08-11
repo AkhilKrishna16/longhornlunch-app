@@ -58,7 +58,7 @@ const MainLayout = ({isLoading, menuData} : {isLoading: boolean, menuData: strin
 
   if (!menuData || menuData.length == 0 ) {
     return <div className='flex flex-col items-center justify-center h-[75vh] text-gray-200'>
-      <Image src='/texas-cleared-logo.png' width={256} height={256} alt='Longhorns Logo'/>
+      {/* <Image src='/texas-cleared-logo.png' width={256} height={256} alt='Longhorns Logo'/> */}
     </div>
   } 
 
