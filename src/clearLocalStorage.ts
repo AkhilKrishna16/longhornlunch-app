@@ -23,7 +23,10 @@ export const useClearLocalStorageAtMidnight = () => {
       
       const msUntilMidnight = night.getTime() - now.getTime();
       
-      return setTimeout(clearLocalStorageAtMidnight, msUntilMidnight);
+      return setTimeout(() => {
+        clearLocalStorageAtMidnight();
+        scheduleNextClear();
+      }, msUntilMidnight);
     };
 
     const timeoutId = scheduleNextClear();
