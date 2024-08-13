@@ -148,7 +148,7 @@ const Navbar = ({ diningHalls, selectedDiningHall, onDiningHallsChange}: {dining
           <HoverCard>
             <HoverCardTrigger className='cursor-default'>Feedback</HoverCardTrigger>
             <HoverCardContent className='mt-4 bg-navbar border-none text-gray-200 mb-4 w-24'>
-              <form action="mailto:akhil.krishnamurthy2006@gmail.com" method='GET'>
+              <form action="mailto:longhornlunch@gmail.com" method='GET'>
                 <input type="submit" placeholder='Send email' className='bg-navbar text-gray-200 outline-none text-center w-full'/>
               </form>
             </HoverCardContent>
